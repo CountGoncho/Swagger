@@ -1,0 +1,252 @@
+swagger: '2.0'
+info:
+  description: This api provides the necessary operations that allow Guardian to provide invoicing and order related interactions
+  version: 1.0.0
+  title: Arrangement Orders API
+  # put the contact info for your development or API team
+  contact:
+    email: richard.healy@coopdigital.co.uk
+
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+
+# tags are used for organizing operations
+tags:
+- name: developers
+  description: Operations available to regular developers
+
+paths:
+  /arrangement/orders:
+    get:
+      tags:
+      - developers
+      summary: lists arrangement orders from Guardian
+      operationId: listOrders
+      description: |
+        By requesting this resource, it will return a list of orders, each containing the necessary funeral arrangement details to support the invoicing process
+      produces:
+      - application/json
+      responses:
+        200:
+          description: list of orders ready for invoicing
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/OrderItem'
+        400:
+          description: bad input parameter
+definitions:
+  OrderItem:
+    type: object
+    properties:
+      request_id:
+        type: string
+        maximum: 50
+        format: uuid
+        example: d290f1ee-6c54-4b01-90e6-d701748f0851
+      arrangement_id:
+        type: integer
+        example: 1432142341
+      arranger_employee_id:
+        type: string
+        maximum: 6
+        example: 43243
+      funeral_Category:
+        type: string
+        maximum: 50
+        example: Normal
+      plan_provider:
+        type: string
+        maximum: 50
+        example: coop
+      contract_id:
+        type: string
+        maximum: 50
+        example: 6543546
+      community_id:
+        type: string
+        maximum: 50
+        example: 65436543
+      plan_number:
+        type: string
+        maximum: 50
+        example: 93737363
+      cost_centre:
+        type: integer
+        example: 1432142341
+      client:
+        $ref: '#/definitions/Client'
+      deceased:
+        $ref: '#/definitions/Deceased'
+      accountto:
+        $ref: '#/definitions/AccountTo'
+      orderlineitems:
+        type: array
+        items:
+          $ref: '#/definitions/OrderLineItem'
+  Client:
+    properties:
+      relationship_to:
+        type: string
+        maximum: 50
+        example: Brother
+      membership_number:
+        type: string
+        maximum: 50
+        example: 43214321432431
+      employee_id:
+        type: string
+        maximum: 6
+        example: 3243242
+      name:
+        $ref: '#/definitions/Name' 
+      address: 
+        $ref: '#/definitions/Address' 
+      contact: 
+        $ref: '#/definitions/Contact' 
+  Deceased:
+    properties:
+      gender:
+        type: string
+        maximum: 50
+        example: Male
+      religon:
+        type: string
+        maximum: 50
+        example: 1
+      membership_number:
+        type: string
+        maximum: 18
+        example: 633174913070008124
+      date_of_birth:
+        type: string
+        format: YYYY-MM-DD
+        example: 2018-11-13
+      age:
+        type: integer
+        example: 34
+      age_unit:
+        type: string
+        maximum: 50
+        example: Years
+      employee_id:
+        type: string
+        maximum: 6
+        example: 341233
+      length_of_service_years:
+        type: integer
+        example: 23
+      length_of_service_months:
+        type: integer
+        example: 3
+      is_coroners_removal_contract:
+        type: string
+        maximum: 50
+        example: Y
+      date_of_death:
+        type: string
+        format: YYYY-MM-DD
+        example: 2018-11-13
+      collection_type_of_residence:
+        type: string
+        maximum: 20
+        example: Domestic
+      funeral_date:
+        type: string
+        maximum: 15
+        format: YYYY-MM-DD
+        example: 2018-11-30
+      burial_cremation:
+        type: string
+        maximum: 50
+        example: burial
+      plot_type:
+        type: string
+        maximum: 50
+        example: new
+      name:
+        $ref: '#/definitions/Name' 
+      address: 
+        $ref: '#/definitions/Address' 
+      
+  AccountTo:
+    properties:
+      relationship_to:
+        type: string
+        maximum: 50
+        example: Mother
+      account_to:
+        type: string
+        maximum: 50
+        example: client
+      name:
+        $ref: '#/definitions/Name' 
+      address: 
+        $ref: '#/definitions/Address' 
+      contact: 
+        $ref: '#/definitions/Contact' 
+  Name:
+    properties:
+      title:
+        type: string
+        maximum: 20
+        example: Ms
+      first_name:
+        type: string
+        maximum: 50
+        example: Claire
+      last_name:
+        maximum: 50
+        type: string
+        example: Smith
+  Address:
+    properties:
+      line_one:
+        type: string
+        maximum: 50
+        example: 23
+      line_two:
+        type: string
+        maximum: 50
+        example: The Street
+      town_city:
+        type: string
+        maximum: 50
+        example: Fulchester
+      postcode:
+        type: string
+        maximum: 50
+        example: FL334AG
+  Contact:
+    properties:
+      primary_telephone_number:
+        type: string
+        maximum: 50
+        example: 016163699292
+      mobile_telephone_number:
+        type: string
+        maximum: 50
+        example: 01613328383
+      email_address:
+        type: string
+        maximum: 50
+        example: user@domain.com
+  OrderLineItem:
+    properties:
+      item_id:
+        type: string
+        maximum: 50
+        example: 66544
+      quantity:
+        type: integer
+        example: 3
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+# basePath: /funreal/arranger/1.0.0
+schemes:
+ - https
+# Added by API Auto Mocking Plugin
+# basePath: /funreal/arranger/1.0.0
+# Added by API Auto Mocking Plugin
+basePath: /funreal/arranger/1.0.0
