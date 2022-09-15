@@ -1,7 +1,7 @@
 ---
 swagger: "2.0"
 info:
-  description: This api provides the necessary operations that allow Guardian to provide invoicing and order related interactions
+  description: RICK RICK  api provides the necessary operations that allow Guardian to provide invoicing and order related interactions
   version: 1.0.0
   title: Arrangement Orders API
   contact:
